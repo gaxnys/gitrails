@@ -1,5 +1,16 @@
 import fetch from 'isomorphic-fetch'
 
+export const RAILS_TEST_ACTION = 'RAILS_TEST_ACTION'
+export const railsTestAction = () => ({
+    type: RAILS_TEST_ACTION
+})
+
+export const RAILS_SEND_MESSAGE = 'RAILS_SEND_MESSAGE'
+export const railsSendMessage = (message) => ({
+    type: RAILS_SEND_MESSAGE,
+    message
+})
+
 export const TODO_ADDED = 'TODO_ADDED'
 export const todoAdded = (json) => ({
     type: TODO_ADDED,
