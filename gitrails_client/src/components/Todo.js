@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import ItemList from '../containers/ItemList'
+
 const Todo = (props) => (
     <li
         onClick={props.onClick}
@@ -9,6 +11,7 @@ const Todo = (props) => (
         }}
     >
         {props.title}
+        <ItemList todo={props.id} />
     </li>
 )
 

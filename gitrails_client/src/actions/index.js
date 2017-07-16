@@ -1,12 +1,9 @@
 import fetch from 'isomorphic-fetch'
 
-let nextTodoId = 0
-
-export const ADD_TODO = 'ADD_TODO'
-export const addTodo = (text) => ({
-    type: ADD_TODO,
-    id: nextTodoId++,
-    text
+export const TODO_ADDED = 'TODO_ADDED'
+export const todoAdded = (json) => ({
+    type: TODO_ADDED,
+    todo: json
 })
 
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
@@ -32,6 +29,18 @@ export const receiveTodos = (json) => ({
     todos: json
 })
 
+export const REQUEST_TODO_ITEMS = 'REQUEST_TODO_ITEMS'
+export const requestTodoItems = (id) => ({
+    type: REQUEST_TODO_ITEMS,
+    id
+})
+
+export const RECEIVE_TODO_ITEMS = 'RECEIVE_TODO_ITEMS'
+export const receiveTodoItems = (json) => ({
+    type: RECEIVE_TODO_ITEMS,
+    todoItems: json
+})
+
 export const fetchTodos = () => (dispatch) => {
     dispatch(requestTodos())
     return fetch('http://localhost:3001/todos')
@@ -41,5 +50,19 @@ export const fetchTodos = () => (dispatch) => {
         )
         .then(json => {
             dispatch(receiveTodos(json))
+        })
+}
+
+export const addTodoItem = (todoID, itemName) => (dispatch) => {
+    var data = new FormData()
+    data.append("name", itemName)
+    return fetch('http://localhost:3001/todos/' + todoID + '/items',
+                 { method: "POST", body: data})
+        .then(
+            response => response.json(),
+            error => console.log('An error occured.', error)
+        )
+        .then(json => {
+            dispatch(todoAdded(json))
         })
 }

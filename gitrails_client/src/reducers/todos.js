@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO, RECEIVE_TODOS } from '../actions'
+import { TODO_ADDED, TOGGLE_TODO, RECEIVE_TODOS } from '../actions'
 import { assignNewData } from './index'
 
 const todos = (state = {}, action) => {
@@ -11,6 +11,8 @@ const todos = (state = {}, action) => {
             )
         case RECEIVE_TODOS:
             return Object.assign({}, state, assignNewData(action.todos))
+        case TODO_ADDED:
+            return Object.assign({}, state, assignNewData([action.todo]))
         default:
             return state
     }
