@@ -1,20 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Link = ({ active, children, onClick }) => {
-    if (active) {
-        return <span>{children}</span>
+const Link = (props) => {
+    if (props.active) {
+        return <span>{props.children}</span>
     }
 
     return (
         <a
-            href="#"
-            onClick={e => {
-                    e.preventDefault()
-                    onClick()
+            href=""
+            onClick={event => {
+                    event.preventDefault()
+                    props.onClick()
                 }}
         >
-            {children}
+            {props.children}
         </a>
     )
 }
